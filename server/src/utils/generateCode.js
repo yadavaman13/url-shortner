@@ -1,10 +1,10 @@
 const generateCode = () => {
-    const mainStr = 'abcdefghijklmnopqrstuvwxyz'
+    const mainStr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-    const shortCode = ''
+    let shortCode = ''
 
     for(let i=0; i<6; i++){
-        shortCode += mainStr.charAt( Math.floor (Math.random() * 62))
+        shortCode += mainStr.charAt(Math.floor(Math.random() * mainStr.length))
     }
 
     return shortCode
