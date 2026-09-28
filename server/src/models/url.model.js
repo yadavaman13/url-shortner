@@ -1,19 +1,23 @@
 import mongoose from "mongoose";
 
 const urlSchema = new mongoose.Schema({
-    originalUrl:{
+    originalUrl: {
         type: String,
-        required:true
+        required: true,
+        trim: true
     },
-    shortUrl:{
+    shortUrl: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true,
+        index: true
     },
     clicks: {
         type: Number,
         default: 0
     }
-},{
+}, {
     timestamps: true
 })
 
