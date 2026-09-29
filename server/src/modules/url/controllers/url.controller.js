@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
-import urlModel from "../../models/url.model.js"
-import generateCode from "../../utils/generateCode.js"
-import envConfig from "../../config/env.config.js"
+import urlModel from "../../../models/url.model.js"
+import generateCode from "../../../utils/generateCode.js"
+import envConfig from "../../../config/env.config.js"
 
 export async function createShortenUrl(req, res) {
     try {

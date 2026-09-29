@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
-import urlRouter from './modules/routes/url.routes.js'
-import { redirectUrl } from './modules/controllers/url.controller.js'
+import urlRouter from './modules/url/routes/url.routes.js'
+import { redirectUrl } from './modules/url/controllers/url.controller.js'
 
 const app = express()
 
