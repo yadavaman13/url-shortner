@@ -1,26 +1,29 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const urlSchema = new mongoose.Schema({
-    originalUrl: {
-        type: String,
-        required: true,
-        trim: true
+const urlSchema = new mongoose.Schema(
+    {
+        originalUrl: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        shortUrl: {
+            type: String,
+            required: true,
+            unique: true,
+            trim: true,
+            index: true,
+        },
+        clicks: {
+            type: Number,
+            default: 0,
+        },
     },
-    shortUrl: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        index: true
+    {
+        timestamps: true,
     },
-    clicks: {
-        type: Number,
-        default: 0
-    }
-}, {
-    timestamps: true
-})
+);
 
-const urlModel = mongoose.model("urls",urlSchema)
+const urlModel = mongoose.model('urls', urlSchema);
 
-export default urlModel
+export default urlModel;

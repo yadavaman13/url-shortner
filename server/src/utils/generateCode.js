@@ -1,13 +1,13 @@
 const generateCode = () => {
-    const mainStr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    const mainStr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-    let shortCode = ''
+    let shortCode = '';
 
-    for(let i=0; i<6; i++){
-        shortCode += mainStr.charAt(Math.floor(Math.random() * mainStr.length))
+    for (let i = 0; i < 6; i++) {
+        shortCode += mainStr.charAt(Math.floor(Math.random() * mainStr.length));
     }
 
-    return shortCode
-}
+    return shortCode;
+};
 
-export default generateCode
+export default generateCode;

@@ -1,195 +1,195 @@
-import mongoose from "mongoose"
-import urlModel from "../../../models/url.model.js"
-import generateCode from "../../../utils/generateCode.js"
-import envConfig from "../../../config/env.config.js"
+import mongoose from 'mongoose';
+import urlModel from '../../../models/url.model.js';
+import generateCode from '../../../utils/generateCode.js';
+import envConfig from '../../../config/env.config.js';
 
 export async function createShortenUrl(req, res) {
     try {
-        const { url } = req.body
+        const { url } = req.body;
 
         if (!url) {
             return res.status(400).json({
-                error: "Please enter an URL"
-            })
+                error: 'Please enter an URL',
+            });
         }
 
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
             return res.status(400).json({
-                error: "Please enter a valid URL (must start with http:// or https://)"
-            })
+                error: 'Please enter a valid URL (must start with http:// or https://)',
+            });
         }
 
         if (url.length > 2048) {
             return res.status(400).json({
-                error: "url is too long"
-            })
+                error: 'url is too long',
+            });
         }
 
-        let shortCode = generateCode()
-        let attempts = 0
+        let shortCode = generateCode();
+        let attempts = 0;
         while (await urlModel.findOne({ shortUrl: shortCode })) {
-            shortCode = generateCode()
-            attempts++
+            shortCode = generateCode();
+            attempts++;
             if (attempts > 5) {
                 return res.status(500).json({
-                    error: "Failed to generate unique short code, please try again"
-                })
+                    error: 'Failed to generate unique short code, please try again',
+                });
             }
         }
 
         const newUrl = await urlModel.create({
             originalUrl: url.trim(),
-            shortUrl: shortCode
-        })
+            shortUrl: shortCode,
+        });
 
-        const serverUrl = (envConfig.SERVER_URL || 'http://localhost:3000').replace(/\/$/, '')
-        const fullShortUrl = `${serverUrl}/${newUrl.shortUrl}`
+        const serverUrl = (envConfig.SERVER_URL || 'http://localhost:3000').replace(/\/$/, '');
+        const fullShortUrl = `${serverUrl}/${newUrl.shortUrl}`;
 
         return res.status(201).json({
-            message: "shorten url created successfully",
+            message: 'shorten url created successfully',
             data: {
                 id: newUrl._id,
                 originalUrl: newUrl.originalUrl,
                 shortUrl: newUrl.shortUrl,
                 fullShortUrl,
                 clicks: newUrl.clicks,
-                createdAt: newUrl.createdAt
-            }
-        })
+                createdAt: newUrl.createdAt,
+            },
+        });
     } catch (err) {
-        console.error("Error creating shortened URL:", err)
+        console.error('Error creating shortened URL:', err);
         return res.status(500).json({
-            error: "Internal server error"
-        })
+            error: 'Internal server error',
+        });
     }
 }
 
 export async function redirectUrl(req, res) {
     try {
-        const { shortCode } = req.params
+        const { shortCode } = req.params;
 
         if (!shortCode) {
             return res.status(400).json({
-                error: "Please provide a short code"
-            })
+                error: 'Please provide a short code',
+            });
         }
 
         if (shortCode === 'favicon.ico') {
-            return res.status(204).end()
+            return res.status(204).end();
         }
 
         const urlDoc = await urlModel.findOneAndUpdate(
             { shortUrl: shortCode },
             { $inc: { clicks: 1 } },
-            { new: true }
-        )
+            { new: true },
+        );
 
         if (!urlDoc) {
             return res.status(404).json({
-                error: "Short URL not found"
-            })
+                error: 'Short URL not found',
+            });
         }
 
-        return res.redirect(urlDoc.originalUrl)
+        return res.redirect(urlDoc.originalUrl);
     } catch (err) {
-        console.error("Error during redirection:", err)
+        console.error('Error during redirection:', err);
         return res.status(500).json({
-            error: "Internal server error"
-        })
+            error: 'Internal server error',
+        });
     }
 }
 
 export async function getAllUrls(req, res) {
     try {
-        const urls = await urlModel.find().sort({ createdAt: -1 })
+        const urls = await urlModel.find().sort({ createdAt: -1 });
 
         return res.status(200).json({
-            message: "URLs fetched successfully",
+            message: 'URLs fetched successfully',
             data: {
-                urls
-            }
-        })
+                urls,
+            },
+        });
     } catch (err) {
-        console.error("Error fetching URLs:", err)
+        console.error('Error fetching URLs:', err);
         return res.status(500).json({
-            error: "Internal server error"
-        })
+            error: 'Internal server error',
+        });
     }
 }
 
 //get url by id and shorturl
 export async function getUrlById(req, res) {
     try {
-        const { id } = req.params
+        const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({
-                error: "Enter url Id or short code"
-            })
+                error: 'Enter url Id or short code',
+            });
         }
 
-        let url = null
+        let url = null;
         if (mongoose.Types.ObjectId.isValid(id)) {
-            url = await urlModel.findById(id)
+            url = await urlModel.findById(id);
         }
 
         if (!url) {
-            url = await urlModel.findOne({ shortUrl: id })
+            url = await urlModel.findOne({ shortUrl: id });
         }
 
         if (!url) {
             return res.status(404).json({
-                error: "No url exists with this Id or short code"
-            })
+                error: 'No url exists with this Id or short code',
+            });
         }
 
         return res.status(200).json({
-            message: "url fetched successfully",
+            message: 'url fetched successfully',
             data: {
-                url
-            }
-        })
+                url,
+            },
+        });
     } catch (err) {
-        console.error("Error fetching URL:", err)
+        console.error('Error fetching URL:', err);
         return res.status(500).json({
-            error: "Internal server error"
-        })
+            error: 'Internal server error',
+        });
     }
 }
 
 //delete url by id and shorturl
 export async function deleteUrl(req, res) {
     try {
-        const { id } = req.params
+        const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({
-                error: "Please enter an id or short code"
-            })
+                error: 'Please enter an id or short code',
+            });
         }
 
-        let url = null
+        let url = null;
         if (mongoose.Types.ObjectId.isValid(id)) {
-            url = await urlModel.findByIdAndDelete(id)
+            url = await urlModel.findByIdAndDelete(id);
         }
 
         if (!url) {
-            url = await urlModel.findOneAndDelete({ shortUrl: id })
+            url = await urlModel.findOneAndDelete({ shortUrl: id });
         }
 
         if (!url) {
             return res.status(404).json({
-                error: "No url exists with this id"
-            })
+                error: 'No url exists with this id',
+            });
         }
 
         return res.status(200).json({
-            message: "Url deleted successfully"
-        })
+            message: 'Url deleted successfully',
+        });
     } catch (err) {
-        console.error("Error deleting URL:", err)
+        console.error('Error deleting URL:', err);
         return res.status(500).json({
-            error: "Internal server error"
-        })
+            error: 'Internal server error',
+        });
     }
 }
