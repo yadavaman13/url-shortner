@@ -117,6 +117,7 @@ export async function getAllUrls(req, res) {
     }
 }
 
+//get url by id and shorturl
 export async function getUrlById(req, res) {
     try {
         const { id } = req.params
@@ -156,6 +157,7 @@ export async function getUrlById(req, res) {
     }
 }
 
+//delete url by id and shorturl
 export async function deleteUrl(req, res) {
     try {
         const { id } = req.params
