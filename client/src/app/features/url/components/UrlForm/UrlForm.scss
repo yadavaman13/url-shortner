@@ -1,0 +1,273 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/mixins' as *;
+
+.url-form-container {
+    @include card-surface;
+    padding: 1.75rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+    position: relative;
+
+    @include mobile {
+        padding: 1.25rem;
+    }
+}
+
+.url-form-header {
+    margin-bottom: 1.25rem;
+
+    .form-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .form-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+    }
+}
+
+.url-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group-main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: $border-radius-md;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:focus-within {
+        border-color: var(--text-primary);
+        box-shadow: 0 0 0 1px var(--text-primary);
+    }
+
+    &.has-error {
+        border-color: #ef4444;
+    }
+
+    .input-icon {
+        padding-left: 1rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+    }
+
+    .main-url-input {
+        width: 100%;
+        padding: 0.875rem 1rem 0.875rem 0.75rem;
+        border: none;
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        outline: none;
+
+        &::placeholder {
+            color: var(--text-subtle);
+        }
+    }
+
+    .input-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding-right: 0.5rem;
+    }
+
+    .paste-btn,
+    .clear-btn {
+        @include button-reset;
+        padding: 0.35rem 0.6rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border-radius: $border-radius-sm;
+        border: 1px solid var(--border-subtle);
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: background-color var(--transition-fast), color var(--transition-fast);
+
+        &:hover {
+            background: var(--border-subtle);
+            color: var(--text-primary);
+        }
+    }
+}
+
+.field-error {
+    font-size: 0.8rem;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: -0.5rem;
+}
+
+.advanced-toggle-bar {
+    @include flex-between;
+    padding-top: 0.25rem;
+
+    .advanced-toggle-btn {
+        @include button-reset;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        transition: color var(--transition-fast);
+
+        &:hover {
+            color: var(--text-primary);
+        }
+
+        svg {
+            transition: transform var(--transition-fast);
+        }
+
+        &.is-active svg {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.advanced-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-subtle);
+    border-radius: $border-radius-md;
+    animation: fadeIn 0.2s ease;
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+
+    .advanced-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+
+        label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .advanced-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: $border-radius-sm;
+
+            &:focus-within {
+                border-color: var(--text-primary);
+            }
+
+            .prefix-label {
+                padding-left: 0.75rem;
+                font-size: 0.8rem;
+                font-family: var(--font-mono);
+                color: var(--text-muted);
+                user-select: none;
+            }
+
+            input,
+            select {
+                width: 100%;
+                padding: 0.6rem 0.75rem;
+                border: none;
+                background: transparent;
+                color: var(--text-primary);
+                font-size: 0.875rem;
+                outline: none;
+
+                &::placeholder {
+                    color: var(--text-subtle);
+                }
+            }
+
+            select {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.submit-btn {
+    @include button-reset;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background-color: var(--accent-black);
+    color: var(--accent-white);
+    border-radius: $border-radius-md;
+    font-size: 0.925rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+
+    &:hover:not(:disabled) {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .spinner {
+        animation: spin 0.8s linear infinite;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

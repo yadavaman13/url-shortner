@@ -1,0 +1,67 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+.hero-section {
+    text-align: center;
+    padding: 1rem 0 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: $border-radius-full;
+        background: var(--badge-bg);
+        border: 1px solid var(--badge-border);
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .hero-title {
+        font-size: 2.75rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--text-primary);
+        max-width: 680px;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+
+        .highlight {
+            position: relative;
+            display: inline-block;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 4px;
+                left: 0;
+                right: 0;
+                height: 8px;
+                background: var(--border-medium);
+                opacity: 0.4;
+                z-index: -1;
+            }
+        }
+    }
+
+    .hero-description {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        max-width: 520px;
+        line-height: 1.5;
+
+        @include mobile {
+            font-size: 0.95rem;
+        }
+    }
+}

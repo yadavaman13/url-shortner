@@ -1,0 +1,97 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.app-navbar {
+    width: 100%;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    background-color: rgba(var(--bg-primary), 0.9);
+
+    .navbar-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0.875rem 1.5rem;
+        @include flex-between;
+
+        @include mobile {
+            padding: 0.75rem 1rem;
+        }
+    }
+
+    .brand-wrap {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        .brand-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-black);
+            color: var(--accent-white);
+            border-radius: $border-radius-sm;
+            @include flex-center;
+        }
+
+        .brand-text {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: $border-radius-full;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+
+            .pulse-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #22c55e;
+            }
+
+            @include mobile {
+                display: none;
+            }
+        }
+    }
+
+    .navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .nav-btn {
+            @include button-reset;
+            padding: 0.45rem 0.65rem;
+            border-radius: $border-radius-sm;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+
+            &:hover {
+                border-color: var(--border-medium);
+                color: var(--text-primary);
+                background: var(--bg-secondary);
+            }
+        }
+    }
+}

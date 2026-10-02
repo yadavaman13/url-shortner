@@ -1,0 +1,68 @@
+// Black and White Minimalist Design System Tokens
+
+// Light Theme (Default / Root)
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #fafafa;
+    --bg-tertiary: #f4f4f5;
+    --bg-elevated: #ffffff;
+
+    --border-subtle: #e4e4e7;
+    --border-medium: #d4d4d8;
+    --border-strong: #18181b;
+
+    --text-primary: #09090b;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+    --text-subtle: #a1a1aa;
+
+    --accent-black: #000000;
+    --accent-white: #ffffff;
+
+    --badge-bg: #f4f4f5;
+    --badge-text: #18181b;
+    --badge-border: #e4e4e7;
+
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --focus-ring: 0 0 0 2px #000000;
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+
+    --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-base: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// Dark Theme (Explicit or class-based)
+[data-theme='dark'] {
+    --bg-primary: #09090b;
+    --bg-secondary: #121214;
+    --bg-tertiary: #18181b;
+    --bg-elevated: #141416;
+
+    --border-subtle: #27272a;
+    --border-medium: #3f3f46;
+    --border-strong: #fafafa;
+
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --text-subtle: #52525b;
+
+    --accent-black: #ffffff;
+    --accent-white: #000000;
+
+    --badge-bg: #1c1c20;
+    --badge-text: #f4f4f5;
+    --badge-border: #27272a;
+
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+    --focus-ring: 0 0 0 2px #ffffff;
+}
+
+$font-sans: var(--font-sans);
+$font-mono: var(--font-mono);
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-full: 9999px;

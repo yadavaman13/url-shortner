@@ -1,4 +1,4 @@
-# ⚡ URL Shortener (Full-Stack)
+# URL Shortener (Full-Stack)
 
 A modern, fast, and lightweight full-stack URL shortening service built with **Node.js**, **Express 5**, **MongoDB (Mongoose 9)**, and **React 19 (Vite)**.
 
@@ -6,7 +6,7 @@ Shorten lengthy URLs into clean 6-character links, redirect instantly, and track
 
 ---
 
-## 🌟 Features
+## Features
 
 - **Unique 6-Character Codes**: Automatically generates random, collision-safe 6-character alphanumeric slugs (`[a-zA-Z0-9]`).
 - **Atomic Click Tracking**: Uses MongoDB's native `$inc` operator to increment visits safely without race conditions.
@@ -25,7 +25,7 @@ Shorten lengthy URLs into clean 6-character links, redirect instantly, and track
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer            | Technologies                             |
 | :--------------- | :--------------------------------------- |
@@ -36,7 +36,7 @@ Shorten lengthy URLs into clean 6-character links, redirect instantly, and track
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 url-shortner/
@@ -77,7 +77,7 @@ url-shortner/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -284,7 +284,7 @@ Accepts either the MongoDB ObjectId or the short code.
 
 ---
 
-## 🎨 Code Quality & Formatting
+## Code Quality & Formatting
 
 The root repository includes shared configuration for code consistency:
 
@@ -299,7 +299,3 @@ npm run format:check
 Configured in [.prettierrc](file:///.prettierrc) with tab width 4, single quotes, trailing commas, and semicolons.
 
 ---
-
-## 📄 License
-
-This project is licensed under the [ISC License](file:///server/package.json).

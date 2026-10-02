@@ -1,0 +1,61 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2000;
+    pointer-events: none;
+
+    @include mobile {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+.minimal-toast {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 1rem;
+    border-radius: $border-radius-md;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    animation: toastPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.info,
+    &.success {
+        background: var(--accent-black);
+        color: var(--accent-white);
+        border: 1px solid var(--border-medium);
+    }
+
+    &.error {
+        background: #18181b;
+        color: #fca5a5;
+        border: 1px solid #ef4444;
+    }
+
+    .toast-icon {
+        flex-shrink: 0;
+    }
+
+    .toast-message {
+        line-height: 1.3;
+    }
+}
+
+@keyframes toastPop {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

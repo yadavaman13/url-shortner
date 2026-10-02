@@ -1,0 +1,54 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/mixins' as *;
+
+.url-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat-card {
+    @include card-surface;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    box-shadow: var(--card-shadow);
+
+    .stat-header {
+        @include flex-between;
+        color: var(--text-muted);
+
+        .stat-label {
+            font-size: 0.775rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-icon {
+            color: var(--text-secondary);
+        }
+    }
+
+    .stat-value {
+        font-size: 1.85rem;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        line-height: 1.1;
+    }
+
+    .stat-subtext {
+        font-size: 0.775rem;
+        color: var(--text-muted);
+        @include text-truncate;
+    }
+}

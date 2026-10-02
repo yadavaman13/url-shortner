@@ -1,0 +1,57 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.app-footer {
+    width: 100%;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-primary);
+    padding: 2rem 1.5rem;
+    margin-top: auto;
+
+    .footer-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        @include flex-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        @include mobile {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .brand-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .footer-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    }
+
+    .tech-pills {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        .pill {
+            font-size: 0.725rem;
+            font-family: var(--font-mono);
+            padding: 0.2rem 0.55rem;
+            border-radius: $border-radius-full;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            color: var(--text-secondary);
+        }
+    }
+}

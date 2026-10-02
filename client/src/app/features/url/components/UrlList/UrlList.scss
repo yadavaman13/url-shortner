@@ -1,0 +1,189 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/mixins' as *;
+
+.url-list-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.url-list-toolbar {
+    @include flex-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .toolbar-title-wrap {
+        display: flex;
+        align-items: baseline;
+        gap: 0.65rem;
+
+        .list-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        .count-pill {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            padding: 0.15rem 0.5rem;
+            background: var(--badge-bg);
+            color: var(--text-muted);
+            border-radius: $border-radius-full;
+            border: 1px solid var(--border-subtle);
+        }
+    }
+
+    .toolbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        @include mobile {
+            width: 100%;
+        }
+    }
+
+    .search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-subtle);
+        border-radius: $border-radius-md;
+        transition: border-color var(--transition-fast);
+
+        &:focus-within {
+            border-color: var(--text-primary);
+        }
+
+        @include mobile {
+            flex: 1;
+        }
+
+        .search-icon {
+            padding-left: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 0.45rem 0.75rem;
+            border: none;
+            background: transparent;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            outline: none;
+            width: 180px;
+
+            @include mobile {
+                width: 100%;
+            }
+
+            &::placeholder {
+                color: var(--text-subtle);
+            }
+        }
+
+        .clear-search-btn {
+            @include button-reset;
+            padding-right: 0.6rem;
+            color: var(--text-muted);
+
+            &:hover {
+                color: var(--text-primary);
+            }
+        }
+    }
+
+    .refresh-btn {
+        @include button-reset;
+        padding: 0.5rem;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-subtle);
+        border-radius: $border-radius-md;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-fast);
+
+        &:hover:not(:disabled) {
+            border-color: var(--border-medium);
+            color: var(--text-primary);
+        }
+
+        .spin {
+            animation: spin 0.8s linear infinite;
+        }
+    }
+}
+
+.url-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+// Minimalist Empty State
+.url-empty-state {
+    @include card-surface;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    border-style: dashed;
+
+    .empty-icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: $border-radius-full;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-subtle);
+        @include flex-center;
+        color: var(--text-muted);
+    }
+
+    .empty-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .empty-desc {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        max-width: 380px;
+    }
+}
+
+// Minimal Skeleton Loader
+.url-skeleton-card {
+    @include card-surface;
+    padding: 1.25rem 1.5rem;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+        90deg,
+        var(--bg-secondary) 25%,
+        var(--border-subtle) 50%,
+        var(--bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s infinite;
+}
+
+@keyframes skeletonShimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

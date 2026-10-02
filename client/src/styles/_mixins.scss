@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+// Flex helpers
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+// Minimal text truncation
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// Minimal button reset
+@mixin button-reset {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    outline: none;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+    }
+}
+
+// Focus ring
+@mixin focus-ring {
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--focus-ring);
+    }
+}
+
+// Minimalist card border & background
+@mixin card-surface {
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: $border-radius-md;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+// Responsive breakpoint
+@mixin mobile {
+    @media (max-width: 640px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 868px) {
+        @content;
+    }
+}
